@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14545CAF-83FA-4302-A7D3-14AFC5FC0B89}</ProjectGuid>
+    <ProjectGuid>{0339BFB5-7FC3-445B-A9AE-4D23144E34E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAL</RootNamespace>
@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,29 +55,66 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessFactory.cs" />
-    <Compile Include="Interface\IRepo.cs" />
-    <Compile Include="Migrations\202405131843428_intiDB.cs" />
-    <Compile Include="Migrations\202405131843428_intiDB.designer.cs">
-      <DependentUpon>202405131843428_intiDB.cs</DependentUpon>
+    <Compile Include="Interfaces\IRepo.cs" />
+    <Compile Include="Migrations\202405141432357_InitialCreate.cs" />
+    <Compile Include="Migrations\202405141432357_InitialCreate.designer.cs">
+      <DependentUpon>202405141432357_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141711455_AddPrescriptionTable.cs" />
+    <Compile Include="Migrations\202405141711455_AddPrescriptionTable.designer.cs">
+      <DependentUpon>202405141711455_AddPrescriptionTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141811361_AddProductTable.cs" />
+    <Compile Include="Migrations\202405141811361_AddProductTable.designer.cs">
+      <DependentUpon>202405141811361_AddProductTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141853375_AddProductTable1.cs" />
+    <Compile Include="Migrations\202405141853375_AddProductTable1.designer.cs">
+      <DependentUpon>202405141853375_AddProductTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405142004128_AddShoppingCartTables.cs" />
+    <Compile Include="Migrations\202405142004128_AddShoppingCartTables.designer.cs">
+      <DependentUpon>202405142004128_AddShoppingCartTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\Product.cs" />
-    <Compile Include="Model\ProductContext.cs" />
-    <Compile Include="Model\Selection.cs" />
-    <Compile Include="Model\Seller.cs" />
+    <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Prescription.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="PharmacyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repos\ProductRepo.cs" />
-    <Compile Include="Repos\Repo.cs" />
-    <Compile Include="Repos\SelectionRepo.cs" />
-    <Compile Include="Repos\SellerRepo.cs" />
+    <Compile Include="Repositories\CustomerProfileRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\ICustomerProfileRepository.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
+    <Compile Include="Repositories\IPrescriptionRepository.cs" />
+    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Repositories\IShoppingCartRepository.cs" />
+    <Compile Include="Repositories\PrescriptionRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\ShoppingCartRepository.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202405131843428_intiDB.resx">
-      <DependentUpon>202405131843428_intiDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202405141432357_InitialCreate.resx">
+      <DependentUpon>202405141432357_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141711455_AddPrescriptionTable.resx">
+      <DependentUpon>202405141711455_AddPrescriptionTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141811361_AddProductTable.resx">
+      <DependentUpon>202405141811361_AddProductTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141853375_AddProductTable1.resx">
+      <DependentUpon>202405141853375_AddProductTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405142004128_AddShoppingCartTables.resx">
+      <DependentUpon>202405142004128_AddShoppingCartTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

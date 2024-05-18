@@ -1,39 +1,73 @@
-﻿using AutoMapper;
-using BLL.DTOs;
-using DAL;
-using DAL.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BLL.DTOs;
+using DAL;
+using DAL.Models;
+using DAL.Repositories;
 namespace BLL.Services
 {
     public class ProductService
     {
-        public static List<ProductDTO> GET()
-        {
-            var data = DataAccessFactory.ProductData().GET();
-            var cfg = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Product, ProductDTO>();
-            });
-            var mapper = new Mapper(cfg);
-            var mapped = mapper.Map<List<ProductDTO>>(data);
+        private readonly IProductRepository _productRepository;
 
-            return mapped;
-        }
-        public static ProductDTO GET(int ProductId)
+        public ProductService()
         {
-            var data = DataAccessFactory.ProductData().GET(ProductId);
-            var cfg = new MapperConfiguration(c =>
+            _productRepository = DataAccessFactory.ProductRepo();
+        }
+
+        public void AddProduct(AddProductDTO addProductDto)
+        {
+            var product = new Product
             {
-                c.CreateMap<Product, ProductDTO>();
-            });
-            var mapper = new Mapper(cfg);
-            var mapped = mapper.Map<ProductDTO>(data);
-            return mapped;
+                Name = addProductDto.Name,
+                Description = addProductDto.Description,
+                Price = addProductDto.Price,
+                Availability = addProductDto.Availability
+            };
+
+            _productRepository.AddProduct(product);
+        }
+
+        public List<ProductDTO> SearchProducts(string searchTerm)
+        {
+            var products = _productRepository.SearchProducts(searchTerm);
+            var productDtos = new List<ProductDTO>();
+
+            foreach (var product in products)
+            {
+                productDtos.Add(new ProductDTO
+                {
+                    ProductId = product.ProductId,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Availability = product.Availability
+                });
+            }
+
+            return productDtos;
+        }
+
+        public ProductDTO GetProductById(int productId)
+        {
+            var product = _productRepository.GetProductById(productId);
+
+            if (product == null)
+            {
+                throw new System.Exception("Product not found.");
+            }
+
+            return new ProductDTO
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Availability = product.Availability
+            };
         }
     }
 }

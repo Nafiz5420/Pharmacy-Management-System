@@ -1,27 +1,36 @@
-﻿using DAL.Interface;
-using DAL.Model;
-using DAL.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Repositories;
+using DAL.Interfaces;
+using DAL.Models;
 
 namespace DAL
 {
     public static class DataAccessFactory
     {
-        public static IRepo<Seller, int, bool> SellerData()
+        public static ICustomerRepository CustomerData()
         {
-            return new SellerRepo();
+            return new CustomerRepository();
         }
+
+
+
         public static IRepo<Product, int, bool> ProductData()
         {
-            return new ProductRepo();
+            return new ProductRepository();
         }
-        public static IRepo<Selection, int, bool> SelectionData()
+
+        public static IRepo<CartItem, int, bool> ShoppingCartData()
         {
-            return new SelectionRepo();
+            return new ShoppingCartRepository();
+        }
+
+        public static IProductRepository ProductRepo()
+        {
+            return new ProductRepository();
+        }
+
+        public static IShoppingCartRepository ShoppingCartRepo()
+        {
+            return new ShoppingCartRepository();
         }
     }
 }
